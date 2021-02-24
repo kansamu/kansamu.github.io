@@ -4,16 +4,16 @@
 
 # Site
 title: Kansamuの博客
-subtitle: '一位在路上的Marketer'
-description: ''
-keywords:
+subtitle: '一个属于渣渣Coder的博客'
+description: '一个属于渣渣Coder的博客'
+keywords: Kansamu,Kansamu博客,羽川早垣,博客,Blog
 author: Kansamu216
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://kansamu.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -103,3 +103,7 @@ theme: cactus
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+addlink:
+  before_text: 本文永久链接 # text before the post link
+  after_text: 请遵循Creative Commons license4.0 # text after the post link
