@@ -18,7 +18,6 @@ nav:
   about: /about/
   articles: /archives/
   search: /search/
-  projects: projects_url
 
 
 # Links to your social media accounts.
@@ -84,7 +83,7 @@ logo:
   height: 50
   url: /images/logo.png
   gravatar: false
-  grayout: true
+  grayout: false
 
 # Customize the favicons.
 # Cactus supports a limited set of the three most important icons:
