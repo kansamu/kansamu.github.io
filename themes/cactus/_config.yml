@@ -140,7 +140,7 @@ open_graph:
 # Fill in your Disqus Comments Shortname to enable Disqus comments.
 disqus:
   enabled: true
-  shortname: kansamu
+  shortname: KansamuBlog
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:
@@ -149,8 +149,8 @@ google_analytics:
 
 # Fill in your Baidu Analytics tracking ID to enable Baidu Analytics.
 baidu_analytics:
-  enabled: false
-  id: 2e6da3c375c8a87f5b664cea6d4cb29c
+  enabled: true
+  id: 6e31a6708c9e03a28b2aac822f55411b
 
 # Fill in your Cloudflare Analytics tracking ID to enable Cloudflare Analytics.
 cloudflare_analytics:
