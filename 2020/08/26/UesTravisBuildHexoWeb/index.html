@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本篇文章内容是让Hexo实现跨平台跨设备和浏览器环境下修改你的网站。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用TravisCI自动生成Hexo静态网页">
+<meta property="og:url" content="https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/index.html">
+<meta property="og:site_name" content="Kansamuの博客">
+<meta property="og:description" content="本篇文章内容是让Hexo实现跨平台跨设备和浏览器环境下修改你的网站。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kansamu/kansamu@v1.1/pic/weatheringwithyou/dom01.jpg">
+<meta property="article:published_time" content="2020-08-26T13:02:26.000Z">
+<meta property="article:modified_time" content="2021-02-24T12:52:11.904Z">
+<meta property="article:author" content="Kansamu216">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kansamu/kansamu@v1.1/pic/weatheringwithyou/dom01.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>使用TravisCI自动生成Hexo静态网页</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/08/29/WeatheringWithYou/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&text=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&is_video=false&description=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用TravisCI自动生成Hexo静态网页&body=Check out this article: https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&name=使用TravisCI自动生成Hexo静态网页&description=&lt;p&gt; 本篇文章内容是让Hexo实现跨平台跨设备和浏览器环境下修改你的网站。"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&t=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">Hexo存在的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86Hexo%E6%94%BE%E5%9C%A8Github%E4%B8%8A"><span class="toc-number">2.2.</span> <span class="toc-text">将Hexo放在Github上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAGithub%E4%BB%93%E5%BA%93"><span class="toc-number">2.2.1.</span> <span class="toc-text">新建Github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Hexo%E5%88%B0github%E4%BB%93%E5%BA%93"><span class="toc-number">2.2.2.</span> <span class="toc-text">部署Hexo到github仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E4%BA%8E%E5%AD%98%E6%94%BE%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-number">2.3.</span> <span class="toc-text">创建用于存放静态网站的分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">2.3.1.</span> <span class="toc-text">在本地创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push%E6%96%B0%E5%88%86%E6%94%AF%E5%88%B0github"><span class="toc-number">2.3.2.</span> <span class="toc-text">push新分支到github</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AETravis-CI%E4%B8%8EGithubPages"><span class="toc-number">2.4.</span> <span class="toc-text">配置Travis CI与GithubPages</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91TravisCI%E6%B7%BB%E5%8A%A0%E4%BD%A0%E7%9A%84github%E4%BB%93%E5%BA%93"><span class="toc-number">2.4.1.</span> <span class="toc-text">向TravisCI添加你的github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91TravisCI%E6%8E%88%E4%BA%88token"><span class="toc-number">2.4.2.</span> <span class="toc-text">向TravisCI授予token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-travis-yml"><span class="toc-number">2.4.3.</span> <span class="toc-text">配置.travis.yml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGithub-pages"><span class="toc-number">2.4.4.</span> <span class="toc-text">配置Github pages</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">进阶内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%A2%98suka%E7%9A%84%E7%89%B9%E6%AE%8A%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">关于主题suka的特殊配置</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用TravisCI自动生成Hexo静态网页
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kansamu216</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-08-26T13:02:26.000Z" itemprop="datePublished">2020-08-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p> 本篇文章内容是让Hexo实现跨平台跨设备和浏览器环境下修改你的网站。<span id="more"></span></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="Hexo存在的问题"><a href="#Hexo存在的问题" class="headerlink" title="Hexo存在的问题"></a>Hexo存在的问题</h3><p>使用Hexo这个node_js程序来生成静态网站是无疑十分方便的，仅仅在本地执行一行<code>Hexo g</code>便可生成一个完整的静态网站。</p>
+<p>你可以把静态网站上传到个个服务商的对象存储又或者是Github，Gitee这样的提供静态网站托管的平台来部署一个静态的网站。</p>
+<p>和wordpress之类的动态web程序把程序运行在服务端相比，Hexo的程序在本地。</p>
+<p>这就造成了一个问题。<strong>我们想要发布一篇新文章亦或是对Blog进行修改只能在有程序的设备上</strong>。</p>
+<p>我们需要Node_js环境以及单独属于这个网站的Hexo程序。如果你的主题还需要额外的node_js依赖，需要的环境便更加复杂。</p>
+<p>可是动态博客可以在任意浏览器环境进行发布或者对博客的更改。如果Hexo部署在本地是不能这样做的。</p>
+<p>本篇文章<strong>内容便是让Hexo实现跨平台和跨设备，甚至是浏览器环境下修改你的网站。</strong></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p><strong><u>请注意！阅读本文需要接触过命令行以及有一定的计算机基础。遇到问题请善用搜索引擎</u></strong></p>
+<ul>
+<li>一个搭建完毕的Hexo框架</li>
+<li>一个Github账号</li>
+<li>一个Git程序</li>
+</ul>
+<blockquote>
+<p>关于Hexo的搭建：Hexo官网有详细的文章，在互联网上也有很多相关的资料。本文不再赘述。</p>
+</blockquote>
+<hr>
+<h3 id="将Hexo放在Github上"><a href="#将Hexo放在Github上" class="headerlink" title="将Hexo放在Github上"></a>将Hexo放在Github上</h3><p><strong>本文使用Windows环境进行讲解</strong></p>
+<h4 id="新建Github仓库"><a href="#新建Github仓库" class="headerlink" title="新建Github仓库"></a>新建Github仓库</h4><p>打开<a href="Github.com">Github</a>,新建一个repositories，将仓库名命名为<strong>username.github.io</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/QQ%E6%88%AA%E5%9B%BE20200826215210.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.2/img/QQ%E6%88%AA%E5%9B%BE20200826215337.png"></p>
+<blockquote>
+<p>username即为你的Github用户名，注意是可以登录使用的用户名而非昵称。</p>
+</blockquote>
+<p>将仓库Clone到本地</p>
+<p>右键一个合适的目录，选择Git bash here</p>
+<p>输入Git clone  仓库地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/20200826222222.png"></p>
+<blockquote>
+<p><strong>请注意！</strong> 你可以选择http和ssh两种方式进行连接。http方式需要输入github账号和密码，ssh方式则是生成密钥。关于设置ssh密钥方式请自行学习。参考链接<a href="!%5B%5D(https://raw.githubusercontent.com/ZaoyuanMoe/zaoyuanmoe/master/img/20200826222222.png)">百度百科</a>。</p>
+<p>当然你也可以选择http方式进行clone，看清复制是那种链接即可。</p>
+</blockquote>
+<hr>
+<h4 id="部署Hexo到github仓库"><a href="#部署Hexo到github仓库" class="headerlink" title="部署Hexo到github仓库"></a>部署Hexo到github仓库</h4><p>完整的复制你的hexo所有的文件到clone下的文件夹内</p>
+<p>通常情况下，一个完整的Hexo应该是长这样的，请复制所有内容到clone下的仓库根目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/QQ20200826223230.png"></p>
+<p>接下来请在仓库目录内运行git bash here</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/QQ20200826223604.png"></p>
+<p>正常情况下应该会有个（master），这代表你正在操作master分支</p>
+<p>请执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;一段自定义的信息&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>请注意</strong>，如果你是第一次使用git，请配置git的用户名和密码</p>
+<p>请执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name  &quot;username&quot;  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email  &quot;email&quot;</span><br></pre></td></tr></table></figure>
+
+<p>username即为你在github的用户名</p>
+<p>email请使用你在github使用的邮箱之一</p>
+</blockquote>
+<p>这时你访问你的github仓库，就会发现你的hexo程序已经上传到了github</p>
+<h3 id="创建用于存放静态网站的分支"><a href="#创建用于存放静态网站的分支" class="headerlink" title="创建用于存放静态网站的分支"></a>创建用于存放静态网站的分支</h3><h4 id="在本地创建分支"><a href="#在本地创建分支" class="headerlink" title="在本地创建分支"></a>在本地创建分支</h4><p>请执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hexo</span><br></pre></td></tr></table></figure>
+
+<p>这段命令的意思是创建了一个名为hexo的分支，当然，这个名字你可以用其他的</p>
+<p>这时你输入<code>git branch</code>可以查看本地的分支</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img//QQ20200826225134.png"></p>
+<p>可以看到，你现在已经在hexo分支了，并且本地有两个分支，一个master，一个hexo</p>
+<p>通过蓝色字体可以知道现在我们在hexo分支</p>
+<h4 id="push新分支到github"><a href="#push新分支到github" class="headerlink" title="push新分支到github"></a>push新分支到github</h4><p><strong>请删除除了.git以外所有的文件和文件夹</strong></p>
+<p>然后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;初始化hexo分支&quot;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们已经完成了新建分支hexo</p>
+<p>请切换回master分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<p>现在把新的hexo分支push到github</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure>
+
+<p>现在，你已经完成把和hexo分支上传到github，查看你的github会发现hexo分支已经出现</p>
+<h3 id="配置Travis-CI与GithubPages"><a href="#配置Travis-CI与GithubPages" class="headerlink" title="配置Travis CI与GithubPages"></a>配置Travis CI与GithubPages</h3><h4 id="向TravisCI添加你的github仓库"><a href="#向TravisCI添加你的github仓库" class="headerlink" title="向TravisCI添加你的github仓库"></a>向TravisCI添加你的github仓库</h4><p>打开Travis <a target="_blank" rel="noopener" href="https://travis-ci.com/">https://travis-ci.com/</a></p>
+<p>点击右上角的sign选择sign with github，即使用github登录</p>
+<p>在红圈的地方去github授权可以访问的仓库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/QQ%E6%88%AA%E5%9B%BE20200826230609.png"></p>
+<h4 id="向TravisCI授予token"><a href="#向TravisCI授予token" class="headerlink" title="向TravisCI授予token"></a>向TravisCI授予token</h4><p>选择你的Github右上角头像，找到setting，在sitting的左栏最下面找到Developer setting</p>
+<p>找到Personal access tokens</p>
+<p>或者直接访问<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>新建一个token，note可以任意填写，但是这个名字一会要用，我填写为HexoCI</p>
+<p><strong>勾选repo选项</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/20200826231759.png"></p>
+<p>复制生成的token，前往TravisCI的<a target="_blank" rel="noopener" href="https://travis-ci.com/account/repositories">Setting</a></p>
+<p>点击右边所在仓库的setting，找到Environment Variables</p>
+<p>在name项填入你刚才生成token的名称，我应该填写HexoCI</p>
+<p>在Value填入你复制的token</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/20200826232606.png"></p>
+<h4 id="配置-travis-yml"><a href="#配置-travis-yml" class="headerlink" title="配置.travis.yml"></a>配置.travis.yml</h4><p>在你的本地仓库下创建一个名为.travis.yml的文件</p>
+<p>填入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">language: node_js</span><br><span class="line"></span><br><span class="line">node_js: stable </span><br><span class="line"></span><br><span class="line">cache:</span><br><span class="line">    directorise:</span><br><span class="line">    - node_modules</span><br><span class="line"> </span><br><span class="line">install:</span><br><span class="line">    - npm install</span><br><span class="line">   </span><br><span class="line">script:</span><br><span class="line">    - hexo clean</span><br><span class="line">    - hexo g</span><br><span class="line">  </span><br><span class="line">after_script:</span><br><span class="line">    - cd .&#x2F;public</span><br><span class="line">    - git init</span><br><span class="line">    - git config user.name &quot;username&quot; # 在此填入你的github用户名</span><br><span class="line">    - git config user.email &quot;email&quot; # 在此填入你的github所用邮箱</span><br><span class="line">    - git add .</span><br><span class="line">    - git commit -m &quot;自动构建Hexo博客文章&quot;</span><br><span class="line">    - git push --force --quiet &quot;https:&#x2F;&#x2F;$&#123;HexoCI&#125;@$&#123;GH_REF&#125;&quot; master:hexo</span><br><span class="line">    # 请注意最后一行花括号内的HexoCI应填入你刚才生成的token名，我的是HexoCI</span><br><span class="line">branches:</span><br><span class="line">    only:</span><br><span class="line">    - master</span><br><span class="line">    # 触发自动构建的分支名称</span><br><span class="line">env:</span><br><span class="line">    global:</span><br><span class="line">    - GH_REF: github.com&#x2F;Kansamu&#x2F;Kansamu.github.io.git #在次填入你的仓库地址</span><br></pre></td></tr></table></figure>
+
+<p>如何配置已在代码中进行注释，现再重复一遍</p>
+<blockquote>
+<ul>
+<li>git config user.name “username” # 在此填入你的github用户名</li>
+<li>git config user.email “email” # 在次填入你的github所用邮箱</li>
+</ul>
+</blockquote>
+<p>对于此行配置</p>
+<p><code>git push --force --quiet &quot;https://$&#123;HexoCI&#125;@$&#123;GH_REF&#125;&quot; master:hexo</code></p>
+<p>HexoCI为你创建的token名</p>
+<p>后面的master:hexo指从master分支push到hexo分支</p>
+<p><code>GH_REF: github.com/Kansamu/Kansamu.github.io.git #在次填入你的仓库地址</code></p>
+<p>请把kansamu/kansamu.github.io替换成你的用户名和你的仓库名称</p>
+<p><strong>注意不要忘了结尾的.git</strong></p>
+<hr>
+<p>如果你是在本地仓库创建的，请push到github上</p>
+<p>老生常谈的操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .travis.yml</span><br><span class="line">git commit -m &quot;create .travis.yml&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>请注意，请在本地仓库的master分支进行操作，.travis.yml应该存在于master分支。</p>
+<h4 id="配置Github-pages"><a href="#配置Github-pages" class="headerlink" title="配置Github pages"></a>配置Github pages</h4><p>请在仓库的Setting中的github pages中切换分支为hexo</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/20200826234842.png"></p>
+<hr>
+<h2 id="进阶内容"><a href="#进阶内容" class="headerlink" title="进阶内容"></a>进阶内容</h2><h3 id="关于主题suka的特殊配置"><a href="#关于主题suka的特殊配置" class="headerlink" title="关于主题suka的特殊配置"></a>关于主题suka的特殊配置</h3><p>我的博客使用的是Sukkaw开发的suka主题<a target="_blank" rel="noopener" href="https://github.com/SukkaW/hexo-theme-suka">https://github.com/SukkaW/hexo-theme-suka</a></p>
+<p>在进行部署自动构建的时候遇到了一些问题</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zaoyuanmoe/zaoyuanmoe@v1.3/img/20200827001025.png"></p>
+<p><u><strong>可以看到，suka需要额外的依赖</strong></u></p>
+<p>通过查看travis的build日志，我发现了缺少的依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  --------------------------------------------------------</span><br><span class="line"> ____        _           _____ _</span><br><span class="line">&#x2F; ___| _   _| | ____ _  |_   _| |__   ___ _ __ ___   ___</span><br><span class="line">\___ \| | | | |&#x2F; &#x2F; _&#96; |   | | | &#39;_ \ &#x2F; _ \ &#39;_ &#96; _ \ &#x2F; _ \</span><br><span class="line"> ___) | |_| |   &lt; (_| |   | | | | | |  __&#x2F; | | | | |  __&#x2F;</span><br><span class="line">|____&#x2F; \__,_|_|\_\__,_|   |_| |_| |_|\___|_| |_| |_|\___|</span><br><span class="line">hexo-theme-suka ( https:&#x2F;&#x2F;theme-suka.skk.moe )</span><br><span class="line">--------------------------------------------------------------</span><br><span class="line">INFO  Checking dependencies</span><br><span class="line">ERROR Package node-prismjs is not installed.</span><br><span class="line">ERROR Package qr-image is not installed.</span><br><span class="line">ERROR Please install the missing dependencies.</span><br><span class="line">ERROR You can enter suka-theme directory and run following commands:</span><br><span class="line">ERROR $ npm i --production</span><br><span class="line">ERROR $ yarn --production # If you prefer yarn.</span><br></pre></td></tr></table></figure>
+
+<p>也就是suka这个主题需要这两个额外的依赖</p>
+<ul>
+<li>node-prismjs</li>
+<li>qr-image</li>
+</ul>
+<p>在本地安装这个主题时，我只需要执行<code>npm install --production</code>来补全运行环境</p>
+<p>所以我们要在.travis.yml里添加几行配置来安装这个依赖</p>
+<p>使用npm包管理安装依赖十分简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install 包名</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#在.travis.yml的script:项目额外添加的配置</span><br><span class="line">   - cd themes&#x2F;suka</span><br><span class="line">   - npm install node-prismjs</span><br><span class="line">   - npm install qr-image</span><br><span class="line">   - cd ..&#x2F;..</span><br></pre></td></tr></table></figure>
+
+<p>同时，为了方便更新，suka这个主题本身就是一个仓库</p>
+<blockquote>
+<p>为了避免冲突，「Suka」中只有 <code>_config.example.yml</code>，<code>主题配置文件</code> 需要将 <code>_config.example.yml</code> 复制一份并重命名为 <code>_config.yml</code>。</p>
+<p>为了防止开发中 <code>_config.yml</code> 被推送进 Repo 中，我们将 <code>_config.yml</code> 写入了 <code>.gitignore</code>。这意味着在使用 Git 管理 Hexo 站点文件时，<code>主题配置文件</code> 并不会被 Push 到 Repo 中。此时你需要将 <code>_config.yml</code> 从 <code>.gitignore</code> 中删除，注意这有可能会造成使用 <code>git pull</code> 更新「Suka」时造成冲突。</p>
+</blockquote>
+<p>我们需要手动这两个操作执行</p>
+<p>在主题文件夹内的.gitignore内删除_config.yml</p>
+<p>把你本地的主题_config.yml手动push到github</p>
+<p><strong>思维发散</strong></p>
+<p>我并不知道你用的是什么主题，但是我的这段经历可以给你很多思维启发</p>
+<p>主题有额外的依赖，需要在.travis.yml中手动添加配置来使TravisCI可以构建</p>
+<p>如果你的主题也是一个仓库，留意.gitignore</p>
+<p>可能还会有其他地方，所有你的主题文档特殊提醒的地方，都值得你去注意</p>
+<p>本文永久链接 <a href="https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/">https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/</a> 请遵循Creative Commons license4.0</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">Hexo存在的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86Hexo%E6%94%BE%E5%9C%A8Github%E4%B8%8A"><span class="toc-number">2.2.</span> <span class="toc-text">将Hexo放在Github上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAGithub%E4%BB%93%E5%BA%93"><span class="toc-number">2.2.1.</span> <span class="toc-text">新建Github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Hexo%E5%88%B0github%E4%BB%93%E5%BA%93"><span class="toc-number">2.2.2.</span> <span class="toc-text">部署Hexo到github仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E4%BA%8E%E5%AD%98%E6%94%BE%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-number">2.3.</span> <span class="toc-text">创建用于存放静态网站的分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">2.3.1.</span> <span class="toc-text">在本地创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push%E6%96%B0%E5%88%86%E6%94%AF%E5%88%B0github"><span class="toc-number">2.3.2.</span> <span class="toc-text">push新分支到github</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AETravis-CI%E4%B8%8EGithubPages"><span class="toc-number">2.4.</span> <span class="toc-text">配置Travis CI与GithubPages</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91TravisCI%E6%B7%BB%E5%8A%A0%E4%BD%A0%E7%9A%84github%E4%BB%93%E5%BA%93"><span class="toc-number">2.4.1.</span> <span class="toc-text">向TravisCI添加你的github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91TravisCI%E6%8E%88%E4%BA%88token"><span class="toc-number">2.4.2.</span> <span class="toc-text">向TravisCI授予token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-travis-yml"><span class="toc-number">2.4.3.</span> <span class="toc-text">配置.travis.yml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGithub-pages"><span class="toc-number">2.4.4.</span> <span class="toc-text">配置Github pages</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">进阶内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%A2%98suka%E7%9A%84%E7%89%B9%E6%AE%8A%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">关于主题suka的特殊配置</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&text=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&is_video=false&description=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用TravisCI自动生成Hexo静态网页&body=Check out this article: https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&title=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&name=使用TravisCI自动生成Hexo静态网页&description=&lt;p&gt; 本篇文章内容是让Hexo实现跨平台跨设备和浏览器环境下修改你的网站。"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kansamu.com/2020/08/26/UesTravisBuildHexoWeb/&t=使用TravisCI自动生成Hexo静态网页"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    Kansamu216
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?6e31a6708c9e03a28b2aac822f55411b";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'Kansamu';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
