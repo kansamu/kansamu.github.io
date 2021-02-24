@@ -105,5 +105,8 @@ deploy:
   type: ''
 
 addlink:
-  before_text: <b>本文永久链接</b> # text before the post link
-  after_text: <br><b>请遵循</b><a href="https://creativecommons.org/licenses/by/4.0/" target_blank>Creative Commons license4.0</a> # text after the post link
+  before_text: <b>本文永久链接：</b> # text before the post link
+  after_text: <br><b>文章版权遵循：</b><a href="https://creativecommons.org/licenses/by/4.0/" target_blank>Creative Commons license 4.0</a> # text after the post link
+
+aplayer:
+  meting: true
