@@ -5,7 +5,7 @@
 # Site
 title: Kansamuの博客
 subtitle: '一个属于渣渣Coder的博客'
-description: '其实我还没想好任何确切的地点，只是去我该去的地方'
+description: '其实我还没想好任何确切的地点，只是去我该去的地方，去我能去的地方，仅此而已。'
 keywords: Kansamu,Kansamu博客,羽川早垣,博客,Blog
 author: Kansamu216
 language: zh-CN
@@ -106,7 +106,7 @@ deploy:
 
 addlink:
   before_text: <b>本文永久链接：</b> # text before the post link
-  after_text: <br><b>文章版权遵循：</b><a href="https://creativecommons.org/licenses/by/4.0/" target_blank>Creative Commons license 4.0</a> # text after the post link
+  after_text: <br><b>文章版权遵循： </b><a href="https://creativecommons.org/licenses/by/4.0/" target_blank>Creative Commons license 4.0</a> # text after the post link
 
 aplayer:
   meting: true
