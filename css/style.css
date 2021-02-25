@@ -1481,51 +1481,57 @@ article .content .caption {
   content: ")";
 }
 .highlight {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #fff;
-  color: #000;
+  color: #585050;
+  background: #f4ecec;
 }
 .highlight .code .comment,
-.highlight .code .quote,
-.highlight .code .variable {
-  color: #008000;
+.highlight .code .quote {
+  color: #655d5d;
 }
-.highlight .code .keyword,
-.highlight .code .selector-tag,
-.highlight .code .built_in,
+.highlight .code .variable,
+.highlight .code .template-variable,
+.highlight .code .attribute,
+.highlight .code .tag,
 .highlight .code .name,
-.highlight .code .tag {
-  color: #00f;
+.highlight .code .regexp,
+.highlight .code .link,
+.highlight .code .selector-id,
+.highlight .code .selector-class {
+  color: #ca4949;
+}
+.highlight .code .number,
+.highlight .code .meta,
+.highlight .code .built_in,
+.highlight .code .builtin-name,
+.highlight .code .literal,
+.highlight .code .type,
+.highlight .code .params {
+  color: #b45a3c;
 }
 .highlight .code .string,
+.highlight .code .symbol,
+.highlight .code .bullet {
+  color: #4b8b8b;
+}
 .highlight .code .title,
-.highlight .code .section,
-.highlight .code .attribute,
-.highlight .code .literal,
-.highlight .code .template-tag,
-.highlight .code .template-variable,
-.highlight .code .type,
-.highlight .code .addition {
-  color: #a31515;
+.highlight .code .section {
+  color: #7272ca;
+}
+.highlight .code .keyword,
+.highlight .code .selector-tag {
+  color: #8464c4;
 }
 .highlight .code .deletion,
-.highlight .code .selector-attr,
-.highlight .code .selector-pseudo,
-.highlight .code .meta {
-  color: #2b91af;
+.highlight .code .addition {
+  color: #1b1818;
+  display: inline-block;
+  width: 100%;
 }
-.highlight .code .doctag {
-  color: #808080;
+.highlight .code .deletion {
+  background-color: #ca4949;
 }
-.highlight .code .attr {
-  color: #f00;
-}
-.highlight .code .symbol,
-.highlight .code .bullet,
-.highlight .code .link {
-  color: #00b0e8;
+.highlight .code .addition {
+  background-color: #4b8b8b;
 }
 .highlight .code .emphasis {
   font-style: italic;
