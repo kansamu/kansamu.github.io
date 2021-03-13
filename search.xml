@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>如何使用使用Git</title>
+      <link href="2021/03/13/howtousegit/"/>
+      <url>2021/03/13/howtousegit/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"<p>本篇文章将简单的介绍git的用法</p><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p><strong>Git for windows</strong></p><p><a href="https://npm.taobao.org/mirrors/git-for-windows/v2.31.0-rc2.windows.1/Git-2.31.0-rc2-64-bit.exe">https://npm.taobao.org/mirrors/git-for-windows/v2.31.0-rc2.windows.1/Git-2.31.0-rc2-64-bit.exe</a></p><p>双击，然后一直下一步即可</p><h2 id="使用Git"><a href="#使用Git" class="headerlink" title="使用Git"></a>使用Git</h2><p>在某目录内右键选择</p><blockquote><p>Git Bash Here</p></blockquote><p>然后出来一个黑框框，还有路径，现在就可以使用git了</p><h2 id="配置Git用户名和密码"><a href="#配置Git用户名和密码" class="headerlink" title="配置Git用户名和密码"></a>配置Git用户名和密码</h2><p>输入</p><p><code>git config --global user.name &quot;用户名&quot;</code></p><p><code>git config --global user.name &quot;邮箱&quot;</code></p><p>用户名指可以登录的那个”账号”而非”昵称”</p><h2 id="生成ssh秘钥"><a href="#生成ssh秘钥" class="headerlink" title="生成ssh秘钥"></a>生成ssh秘钥</h2><p>git依赖于ssh进行通讯，所以要生成ssh秘钥</p><p><code>ssh-keygen -t rsa -C &quot;邮箱&quot;</code></p><p>出来选项按回车键就可以，出来一串图案就代表已经生成完成</p><hr><p>生成的秘钥存于</p><p>C:\Users\Administrator.ssh</p><p>Administrator指当前的用户，请选择你当前的用户</p><p>目录下的id_rsa.pub文件即为公钥</p><p><b>本文永久链接：</b> <a href="https://kansamu.com/2021/03/13/howtousegit/">https://kansamu.com/2021/03/13/howtousegit/</a> <br><b>文章版权遵循： </b><a href="https://creativecommons.org/licenses/by/4.0/" target_blank>Creative Commons license 4.0</a></p></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {        var options = {            selector: '.gallery-item'        };        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);        }</script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>新的开始！Hexo</title>
       <link href="2021/02/25/HelloHexo/"/>
       <url>2021/02/25/HelloHexo/</url>
